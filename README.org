@@ -1,0 +1,56 @@
+#+title: Emacs Persist State
+#+author: Bram Schoenmakers
+
+* Introduction
+
+I don't leave Emacs often, but sometimes Emacs leaves me.
+
+At moments like these, it's convenient to have a reasonably up to date state of recent files, bookmarks, history variables, etc. saved.
+
+This package contains allows you to execute a function at a regular interval, and then waits for a few seconds of idleness to actually execute the function.
+
+* Installation and usage
+
+Clone the repository and put the package in your =load-path=.
+
+#+begin_src elisp
+  (use-package persist-state
+    :ensure nil
+    :load-path "lisp/persist-state"
+    :init
+    (persist-state-enable))
+#+end_src
+
+Then, add functions to =persist-state-functions= which should be executed, e.g. to save bookmarks at regular intervals:
+
+#+begin_src elisp
+  (add-to-list 'persist-state-functions #'bookmark-save)
+#+end_src
+
+* Configuration
+
+To be written.
+
+* License
+
+MIT License
+
+Copyright (c) 2023 Bram Schoenmakers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
