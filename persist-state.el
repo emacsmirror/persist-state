@@ -40,6 +40,17 @@
   :type '(integer)
   :group 'persist-state)
 
+(defvar persist-state-supported-packages
+  '((bookmark . bookmark-save)
+    (desktop . (lambda () (desktop-save (car desktop-path))))
+    (eshell . eshell-save-some-history)
+    (recentf . recentf-save-list)
+    (savehist . savehist-autosave))
+  "A list of packages supported by persist-state.
+
+Each package is a cons cell with the package name and the
+function name that is responsible for saving state.")
+
 (defun persist-state--regularly-run-on-idle (interval idle-seconds f &rest args)
   "Run function F with ARGS every INTERVAL seconds, plus IDLE-SECONDS."
   (run-with-timer interval interval
@@ -53,9 +64,19 @@
   (when (< (float-time (current-idle-time)) persist-state-save-interval)
     (mapc 'funcall persist-state-saving-functions)))
 
+(defun persist-state--enable-packages ()
+  "Enables all supported packages."
+  (mapc (lambda (package)
+          (with-eval-after-load (car package)
+            (add-to-list 'persist-state-saving-functions (cdr package))))
+        persist-state-supported-packages))
+
 ;;;###autoload
 (defun persist-state-enable ()
   "Start saving the Emacs state at the configured interval."
+  (interactive)
+  (persist-state--enable-packages)
+
   (setq persist-state--save-state-timer
         (persist-state--regularly-run-on-idle persist-state-save-interval
                                  persist-state-wait-idle
@@ -63,6 +84,7 @@
 
 ;;;###autoload
 (defun persist-state-disable ()
+  (interactive)
   "Stop saving the Emacs state."
   (when (timerp persist-state--save-state-timer)
     (cancel-timer persist-state--save-state-timer)))
