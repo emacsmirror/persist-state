@@ -79,8 +79,8 @@ function name that is responsible for saving state.")
 
   (setq persist-state--save-state-timer
         (persist-state--regularly-run-on-idle persist-state-save-interval
-                                 persist-state-wait-idle
-                                 #'persist-state--save-state)))
+                                              persist-state-wait-idle
+                                              #'persist-state--save-state)))
 
 ;;;###autoload
 (defun persist-state-disable ()
