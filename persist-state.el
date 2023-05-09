@@ -43,7 +43,7 @@
 (defvar persist-state-supported-packages
   '((bookmark . bookmark-save)
     (desktop . (lambda () (desktop-save (car desktop-path))))
-    (eshell . eshell-save-some-history)
+    (em-hist . eshell-save-some-history)
     (recentf . recentf-save-list)
     (savehist . savehist-autosave))
   "A list of packages supported by persist-state.
