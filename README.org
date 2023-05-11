@@ -29,7 +29,36 @@ Then, add functions to =persist-state-functions= which should be executed, e.g. 
 
 * Configuration
 
-To be written.
+#+begin_src emacs-lisp :results table :colnames '("Custom variable" "Description")
+  (let ((rows))
+    (mapatoms
+     (lambda (symbol)
+       (when (and (string-match "^persist-state"
+                                (symbol-name symbol))
+                  (custom-variable-p symbol))
+         (push `(,symbol
+                 ,(car
+                   (split-string
+                    (or (get (indirect-variable symbol)
+                             'variable-documentation)
+                        (get symbol 'variable-documentation)
+                        "")
+                    "\n")))
+               rows))))
+    (sort rows (lambda (item1 item2)
+                 (string< (car item1) (car item2)))))
+#+end_src
+
+#+RESULTS:
+| Custom variable                | Description                                                                            |
+|--------------------------------+----------------------------------------------------------------------------------------|
+| persist-state-save-interval    | Persist the Emacs state this amount of seconds.                                        |
+| persist-state-saving-functions | A list of functions that should be executed as part of saving the state of the current Emacs function. |
+| persist-state-wait-idle        | When it's time to save, wait for this amount of idle time (in seconds).                |
+
+** COMMENT Attribution
+
+The code to generate the table of configuration items was inspired by an idea of [[https://xenodium.com/generating-elisp-org-docs/][Álvaro Ramírez]] (a.k.a. xenodium).
 
 * License
 
