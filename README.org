@@ -29,7 +29,7 @@ Then, add functions to =persist-state-functions= which should be executed, e.g. 
 
 * Configuration
 
-#+begin_src emacs-lisp :results table :colnames '("Custom variable" "Description")
+#+begin_src emacs-lisp :exports results :results table :colnames '("Custom variable" "Description")
   (let ((rows))
     (mapatoms
      (lambda (symbol)
