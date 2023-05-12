@@ -5,9 +5,25 @@
 
 I don't leave Emacs often, but sometimes Emacs leaves me.
 
-At moments like these, it's convenient to have a reasonably up to date state of recent files, bookmarks, history variables, etc. saved.
+At moments like these, it's convenient to have a reasonably up to date state of recent files, bookmarks, history variables, etc. available when you restart Emacs again.
 
-This package contains allows you to execute a function at a regular interval, and then waits for a few seconds of idleness to actually execute the function.
+This package allows you to execute a function at a regular interval. To minimize any disturbance while you're working, a few seconds of idleness will trigger the execution of all save functions.
+
+Supported packages:
+
+#+begin_src elisp :exports results :results list
+  (mapcar (lambda (package)
+            (or (plist-get (cdr package) :label)
+                (car package)))
+          persist-state-supported-packages-alist)
+#+end_src
+
+#+RESULTS:
+- bookmark
+- desktop
+- Eshell history
+- recentf
+- savehist
 
 * Installation and usage
 
@@ -28,6 +44,8 @@ Then, add functions to =persist-state-functions= which should be executed, e.g. 
 #+end_src
 
 * Configuration
+
+This table shows which variables can be customized.
 
 #+begin_src emacs-lisp :exports results :results table :colnames '("Custom variable" "Description")
   (let ((rows))

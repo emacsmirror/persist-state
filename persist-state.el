@@ -41,15 +41,17 @@
   :group 'persist-state)
 
 (defvar persist-state-supported-packages
-  '((bookmark . bookmark-save)
-    (desktop . (lambda () (desktop-save (car desktop-path))))
-    (em-hist . eshell-save-some-history)
-    (recentf . recentf-save-list)
-    (savehist . savehist-autosave))
+  `((bookmark . (:function bookmark-save))
+    (desktop . (:function desktop-save :args (desktop-path)))
+    (em-hist . (:function eshell-save-some-history :label "Eshell history"))
+    (recentf . (:function recentf-save-list))
+    (savehist . (:function savehist-autosave)))
   "A list of packages supported by persist-state.
 
-Each package is a cons cell with the package name and the
-function name that is responsible for saving state.")
+Each package is a cons cell with the package name and a plist with:
+- :function (mandatory): function to call to save state;
+- :args (optional): arguments to be passed to the function;
+- :label (optional): a readable package name (for the README).")
 
 (defun persist-state--regularly-run-on-idle (interval idle-seconds f &rest args)
   "Run function F with ARGS every INTERVAL seconds, plus IDLE-SECONDS."
@@ -65,10 +67,19 @@ function name that is responsible for saving state.")
     (mapc 'funcall persist-state-saving-functions)))
 
 (defun persist-state--enable-packages ()
-  "Enables all supported packages."
+  "Enables all supported packages.
+
+If a package has no argumunts (no `:args' attribute, the function
+is added as-is, otherwise it's wrapped in a lambda performing an
+`apply' call.)"
   (mapc (lambda (package)
           (with-eval-after-load (car package)
-            (add-to-list 'persist-state-saving-functions (cdr package))))
+            (let ((attrs (cdr package)))
+              (add-to-list 'persist-state-saving-functions
+                           (if (plist-member attrs :args)
+                               (lambda () (apply (plist-get attrs :function)
+                                            (plist-get attrs :args)))
+                             (plist-get attrs :function))))))
         persist-state-supported-packages))
 
 ;;;###autoload
