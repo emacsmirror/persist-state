@@ -56,7 +56,7 @@ Then, add functions to =persist-state-functions= which should be executed, e.g. 
 | persist-state-saving-functions | A list of functions that should be executed as part of saving state.    |
 | persist-state-wait-idle        | When it's time to save, wait for this amount of idle time (in seconds). |
 
-** COMMENT Attribution
+** COMMENT Attribution :noexport:
 
 The code to generate the table of configuration items was inspired by an idea of [[https://xenodium.com/generating-elisp-org-docs/][Álvaro Ramírez]] (a.k.a. xenodium).
 
