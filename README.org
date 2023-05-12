@@ -26,6 +26,7 @@ Supported packages:
 - bookmark
 - desktop
 - Eshell history
+- [[https://github.com/radian-software/prescient.el][Prescient.el]]
 - recentf
 - savehist
 

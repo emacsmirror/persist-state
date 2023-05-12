@@ -40,10 +40,13 @@
   :type '(integer)
   :group 'persist-state)
 
-(defvar persist-state-supported-packages
+(defvar persist-state-supported-packages-alist
   `((bookmark . (:function bookmark-save))
     (desktop . (:function desktop-save :args (desktop-path)))
     (em-hist . (:function eshell-save-some-history :label "Eshell history"))
+    (prescient . (_ :function prescient--save
+                    :label "Prescient.el"
+                    :url "https://github.com/radian-software/prescient.el"))
     (recentf . (:function recentf-save-list))
     (savehist . (:function savehist-autosave)))
   "A list of packages supported by persist-state.
@@ -80,7 +83,7 @@ is added as-is, otherwise it's wrapped in a lambda performing an
                                (lambda () (apply (plist-get attrs :function)
                                             (plist-get attrs :args)))
                              (plist-get attrs :function))))))
-        persist-state-supported-packages))
+        persist-state-supported-packages-alist))
 
 ;;;###autoload
 (defun persist-state-enable ()
