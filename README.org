@@ -13,8 +13,12 @@ Supported packages:
 
 #+begin_src elisp :exports results :results list
   (mapcar (lambda (package)
-            (or (plist-get (cdr package) :label)
-                (car package)))
+            (let ((label (or (plist-get (cdr package) :label)
+                             (car package)))
+                  (url (plist-get (cdr package) :url)))
+              (if url
+                  (format "[[%s][%s]]" url label)
+                label)))
           persist-state-supported-packages-alist)
 #+end_src
 
