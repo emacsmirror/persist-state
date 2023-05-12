@@ -50,11 +50,11 @@ Then, add functions to =persist-state-functions= which should be executed, e.g. 
 #+end_src
 
 #+RESULTS:
-| Custom variable                | Description                                                                            |
-|--------------------------------+----------------------------------------------------------------------------------------|
-| persist-state-save-interval    | Persist the Emacs state this amount of seconds.                                        |
-| persist-state-saving-functions | A list of functions that should be executed as part of saving the state of the current Emacs function. |
-| persist-state-wait-idle        | When it's time to save, wait for this amount of idle time (in seconds).                |
+| Custom variable                | Description                                                             |
+|--------------------------------+-------------------------------------------------------------------------|
+| persist-state-save-interval    | Interval (in seconds) to persist state.                                 |
+| persist-state-saving-functions | A list of functions that should be executed as part of saving state.    |
+| persist-state-wait-idle        | When it's time to save, wait for this amount of idle time (in seconds). |
 
 ** COMMENT Attribution
 

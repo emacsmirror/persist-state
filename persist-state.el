@@ -21,7 +21,7 @@
   :group 'convenience)
 
 (defcustom persist-state-saving-functions nil
-  "A list of functions that should be executed as part of saving the state of the current Emacs function."
+  "A list of functions that should be executed as part of saving state."
   :type '(repeat function)
   :group 'persist-state)
 
@@ -30,7 +30,7 @@
 
 (defcustom persist-state-save-interval
   (* 15 60)
-  "Persist the Emacs state this amount of seconds."
+  "Interval (in seconds) to persist state."
   :type '(integer)
   :group 'persist-state)
 
@@ -79,8 +79,8 @@ function name that is responsible for saving state.")
 
   (setq persist-state--save-state-timer
         (persist-state--regularly-run-on-idle persist-state-save-interval
-                                              persist-state-wait-idle
-                                              #'persist-state--save-state)))
+                                 persist-state-wait-idle
+                                 #'persist-state--save-state)))
 
 ;;;###autoload
 (defun persist-state-disable ()
