@@ -9,7 +9,9 @@ At moments like these, it's convenient to have a reasonably up to date state of 
 
 This package allows you to execute a function at a regular interval. To minimize any disturbance while you're working, a few seconds of idleness will trigger the execution of all save functions.
 
-Supported packages:
+* Supported packages
+
+persist-state supports a number of packages out of the box:
 
 #+begin_src elisp :exports results :results list
   (mapcar (lambda (package)

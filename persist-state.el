@@ -41,20 +41,30 @@
   :group 'persist-state)
 
 (defvar persist-state-supported-packages-alist
-  `((bookmark . (:function bookmark-save))
-    (desktop . (:function desktop-save :args (desktop-path)))
-    (em-hist . (:function eshell-save-some-history :label "Eshell history"))
-    (prescient . (_ :function prescient--save
-                    :label "Prescient.el"
-                    :url "https://github.com/radian-software/prescient.el"))
+  `((bookmark . (:function (lambda () (when bookmark-save-flag
+                                   (bookmark-save)))))
+
+    (desktop . (:function (lambda () (when desktop-save-mode
+                                  (desktop-save desktop-path)))))
+
+    (em-hist . (:function eshell-save-some-history
+                          :label "Eshell history"))
+
+    (prescient . (:function (lambda () (when prescient-persist-mode
+                                    (prescient--save)))
+                            :label "Prescient.el"
+                            :url "https://github.com/radian-software/prescient.el"))
+
     (recentf . (:function recentf-save-list))
-    (savehist . (:function savehist-autosave)))
+
+    (savehist . (:function (lambda () (when savehist-mode
+                                   savehist-autosave)))))
   "A list of packages supported by persist-state.
 
 Each package is a cons cell with the package name and a plist with:
 - :function (mandatory): function to call to save state;
-- :args (optional): arguments to be passed to the function;
-- :label (optional): a readable package name (for the README).")
+- :label (optional): a readable package name (for the README);
+- :url (optional): URL to the package.")
 
 (defun persist-state--regularly-run-on-idle (interval idle-seconds f &rest args)
   "Run function F with ARGS every INTERVAL seconds, plus IDLE-SECONDS."
@@ -79,10 +89,7 @@ is added as-is, otherwise it's wrapped in a lambda performing an
           (with-eval-after-load (car package)
             (let ((attrs (cdr package)))
               (add-to-list 'persist-state-saving-functions
-                           (if (plist-member attrs :args)
-                               (lambda () (apply (plist-get attrs :function)
-                                            (plist-get attrs :args)))
-                             (plist-get attrs :function))))))
+                           (plist-get attrs :function)))))
         persist-state-supported-packages-alist))
 
 ;;;###autoload
