@@ -67,7 +67,7 @@ Each package is a cons cell with the package name and a plist with:
 (defun persist-state--save-state ()
   "Save state but only when the user was active recently."
   (when (< (float-time (current-idle-time)) persist-state-save-interval)
-    (mapc 'funcall persist-state-saving-functions)))
+    (mapc #'funcall persist-state-saving-functions)))
 
 (defun persist-state--enable-packages ()
   "Enables all supported packages.
