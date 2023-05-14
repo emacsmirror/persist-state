@@ -92,8 +92,7 @@ is added as-is, otherwise it's wrapped in a lambda performing an
                            (plist-get attrs :function)))))
         persist-state-supported-packages-alist))
 
-;;;###autoload
-(defun persist-state-enable ()
+(defun persist-state--enable ()
   "Start saving the Emacs state at the configured interval."
   (interactive)
   (persist-state--enable-packages)
@@ -103,12 +102,23 @@ is added as-is, otherwise it's wrapped in a lambda performing an
                                  persist-state-wait-idle
                                  #'persist-state--save-state)))
 
-;;;###autoload
-(defun persist-state-disable ()
+(defun persist-state--disable ()
   (interactive)
   "Stop saving the Emacs state."
   (when (timerp persist-state--save-state-timer)
     (cancel-timer persist-state--save-state-timer)))
+
+;;;###autoload
+(define-minor-mode persist-state-mode
+  "Create minor mode to enable/disable saving state."
+  :global t
+  :lighter " Persist"
+
+  (cond
+   (persist-state-mode
+    (persist-state--enable))
+   (t
+    (persist-state--disable))))
 
 (provide 'persist-state)
 
