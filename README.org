@@ -5,13 +5,13 @@
 
 I don't leave Emacs often, but sometimes Emacs leaves me.
 
-At moments like these, it's convenient to have a reasonably up to date state of recent files, bookmarks, history variables, etc. available when you restart Emacs again.
+At moments like these, it's convenient to have a reasonably up to date state of recent files, bookmarks, history variables, etc. available when you restart Emacs again. Normally these items are executed at Emacs exit (as part of =kill-emacs-hook=), but when Emacs exits unexpectedly due to a crash, these functions are not executed and you're left with an outdated state (if any).
 
 This package allows you to execute a function at a regular interval. To minimize any disturbance while you're working, a few seconds of idleness will trigger the execution of all save functions.
 
 * Supported packages
 
-persist-state supports a number of packages out of the box:
+persist-state supports a number of packages out of the box. For some packages the save only takes place when the corresponding mode or variable is set accordingly. For example, saving history only takes place if =savehist-mode= is active.
 
 #+begin_src elisp :exports results :results list
   (mapcar (lambda (package)
@@ -34,14 +34,14 @@ persist-state supports a number of packages out of the box:
 
 * Installation and usage
 
-Clone the repository and put the package in your =load-path=.
+At this moment, there is no MELPA package. Therefore, clone the repository and put the package in your =load-path=, for example with =use-package=:
 
 #+begin_src elisp
   (use-package persist-state
     :ensure nil
-    :load-path "lisp/persist-state"
-    :init
-    (persist-state-enable))
+    :load-path "/path/to/emacs-persist-state"
+    :config
+    (persist-state-mode))
 #+end_src
 
 Then, add functions to =persist-state-functions= which should be executed, e.g. to save bookmarks at regular intervals:
