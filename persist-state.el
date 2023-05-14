@@ -103,8 +103,8 @@ is added as-is, otherwise it's wrapped in a lambda performing an
                                  #'persist-state--save-state)))
 
 (defun persist-state--disable ()
-  (interactive)
   "Stop saving the Emacs state."
+  (interactive)
   (when (timerp persist-state--save-state-timer)
     (cancel-timer persist-state--save-state-timer)))
 
