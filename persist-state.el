@@ -1,18 +1,30 @@
-;;; persist-state.el --- Persist variables regularly  -*- lexical-binding: t; -*-
+;;; persist-state.el --- Persist Emacs state regularly  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023 Bram Schoenmakers
 
 ;; Author: Bram Schoenmakers <me@bramschoenmokers.nl>
 ;; Maintainer: Bram Schoenmakers <me@bramschoenmokers.nl>
 ;; Created: 05 May 2023
-
 ;; Package-Version: 0.1
 ;; Keywords: convenience
 ;; URL: https://apps.bram85.nl/git/bram/emacs-persist-state
 
 ;; This file is not part of GNU Emacs.
 
+;; MIT License
+
+;; Copyright (c) 2023 Bram Schoenmakers
+
+;; Permission is hereby granted, free of charge, to any person obtaining a copy
+;; of this software and associated documentation files (the "Software"), to deal
+;; in the Software without restriction, including without limitation the rights
+;; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+;; copies of the Software, and to permit persons to whom the Software is
+;; furnished to do so, subject to the following conditions:
+
 ;;; Commentary:
+
+;; See README.org.
 
 ;;; Code:
 
