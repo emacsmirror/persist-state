@@ -70,7 +70,7 @@
     (recentf . (:function recentf-save-list))
 
     (savehist . (:function (lambda () (when savehist-mode
-                                   savehist-autosave)))))
+                                   (savehist-autosave))))))
   "A list of packages supported by persist-state.
 
 Each package is a cons cell with the package name and a plist with:
