@@ -109,10 +109,12 @@ is added as-is, otherwise it's wrapped in a lambda performing an
   (interactive)
   (persist-state--enable-packages)
 
-  (setq persist-state--save-state-timer
-        (persist-state--regularly-run-on-idle persist-state-save-interval
-                                 persist-state-wait-idle
-                                 #'persist-state--save-state)))
+  ;; only start the timer once
+  (when (null (timerp persist-state--save-state-timer))
+    (setq persist-state--save-state-timer
+          (persist-state--regularly-run-on-idle persist-state-save-interval
+                                   persist-state-wait-idle
+                                   #'persist-state--save-state))))
 
 (defun persist-state--disable ()
   "Stop saving the Emacs state."
