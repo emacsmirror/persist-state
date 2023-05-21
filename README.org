@@ -5,13 +5,13 @@
 
 I don't leave Emacs often, but sometimes Emacs leaves me.
 
-At moments like these, it's convenient to have a reasonably up to date state of recent files, bookmarks, history variables, etc. available when you restart Emacs again. Normally these items are executed at Emacs exit (as part of =kill-emacs-hook=), but when Emacs exits unexpectedly due to a crash, these functions are not executed and you're left with an outdated state (if any).
+At moments like these it's convenient to start Emacs again with a reasonably up to date state from the previous session: history variables, bookmarks, open buffers, etc. Usually these items are saved at Emacs exit (as part of =kill-emacs-hook=), but when Emacs exits unexpectedly due to a crash, these functions are not executed and you're left with an outdated state (if any).
 
-This package allows you to execute a function at a regular interval. To minimize any disturbance while you're working, a few seconds of idleness will trigger the execution of all save functions.
+This package saves your Emacs state regularly when idle for a brief moment, to minimize disturbance of executing all save functions in sequence.
 
 * Supported packages
 
-persist-state supports a number of packages out of the box. For some packages the save only takes place when the corresponding mode or variable is set accordingly. For example, saving history only takes place if =savehist-mode= is active.
+persist-state supports a number of packages out of the box. For some packages the save only takes place when the corresponding mode or variable is set accordingly. For example, saving history only takes place if =savehist-mode= is active. Consult the package's documentation or source code for more info about auto-saving.
 
 #+begin_src elisp :exports results :results list
   (mapcar (lambda (package)
@@ -36,18 +36,14 @@ persist-state supports a number of packages out of the box. For some packages th
 
 At this moment, there is no MELPA package. Therefore, clone the repository and put the package in your =load-path=, for example with =use-package=:
 
+: git clone https://apps.bram85.nl/git/bram/emacs-persist-state.git
+
 #+begin_src elisp
   (use-package persist-state
     :ensure nil
     :load-path "/path/to/emacs-persist-state"
     :config
     (persist-state-mode))
-#+end_src
-
-Then, add functions to =persist-state-functions= which should be executed, e.g. to save bookmarks at regular intervals:
-
-#+begin_src elisp
-  (add-to-list 'persist-state-functions #'bookmark-save)
 #+end_src
 
 * Configuration
@@ -80,6 +76,12 @@ This table shows which variables can be customized.
 | persist-state-save-interval    | Interval (in seconds) to persist state.                                 |
 | persist-state-saving-functions | A list of functions that should be executed as part of saving state.    |
 | persist-state-wait-idle        | When it's time to save, wait for this amount of idle time (in seconds). |
+
+To add custom functions that should be executed, add functions to =persist-state-functions=. E.g. to save bookmarks at regular intervals:
+
+#+begin_src elisp
+  (add-to-list 'persist-state-functions #'bookmark-save)
+#+end_src
 
 ** COMMENT Attribution :noexport:
 
