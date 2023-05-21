@@ -87,6 +87,12 @@ To add custom functions that should be executed, add functions to =persist-state
 
 The code to generate the table of configuration items was inspired by an idea of [[https://xenodium.com/generating-elisp-org-docs/][Álvaro Ramírez]] (a.k.a. xenodium).
 
+* Contact
+
+- Issue reports: [[https://codeberg.org/bram85/emacs-persist-state/issues][Codeberg]]
+- Mastodon: [[https://emacs.ch/@bram85][@bram85@emacs.ch]]
+- Mail: see =git log=.
+
 * License
 
 MIT License
