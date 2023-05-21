@@ -7,7 +7,7 @@
 ;; Created: 05 May 2023
 ;; Package-Version: 0.1
 ;; Keywords: convenience
-;; URL: https://apps.bram85.nl/git/bram/emacs-persist-state
+;; URL: https://codeberg.org/bram85/emacs-persist-state.git
 
 ;; This file is not part of GNU Emacs.
 

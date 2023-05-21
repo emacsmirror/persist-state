@@ -36,7 +36,7 @@ persist-state supports a number of packages out of the box. For some packages th
 
 At this moment, there is no MELPA package. Therefore, clone the repository and put the package in your =load-path=, for example with =use-package=:
 
-: git clone https://apps.bram85.nl/git/bram/emacs-persist-state.git
+: git clone https://codeberg.org/bram85/emacs-persist-state.git
 
 #+begin_src elisp
   (use-package persist-state
