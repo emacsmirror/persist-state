@@ -7,7 +7,7 @@ I don't leave Emacs often, but sometimes Emacs leaves me.
 
 At moments like these it's convenient to start Emacs again with a reasonably up to date state from the previous session: history variables, bookmarks, open buffers, etc. Usually these items are saved at Emacs exit (as part of =kill-emacs-hook=), but when Emacs exits unexpectedly due to a crash, these functions are not executed and you're left with an outdated state (if any).
 
-This package saves your Emacs state regularly when idle for a brief moment, to minimize disturbance of executing all save functions in sequence.
+This package saves your Emacs state regularly when idle for a brief moment, to minimize disturbance of executing all save functions in sequence. In case Emacs is idle for a longer time, no state is saved.
 
 * Supported packages
 
