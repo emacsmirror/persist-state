@@ -57,7 +57,7 @@
                                    (bookmark-save)))))
 
     (desktop . (:function (lambda () (when desktop-save-mode
-                                  (desktop-save (car desktop-path))))))
+                                  (desktop-save (car desktop-path) nil t)))))
 
     (em-hist . (:function eshell-save-some-history
                           :label "Eshell history"))
