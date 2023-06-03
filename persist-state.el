@@ -35,7 +35,12 @@
 
 ;;; Commentary:
 
-;; See README.org.
+;; This package saves your Emacs state regularly when idle for a brief
+;; moment, to minimize disturbance of executing all save functions in
+;; sequence. In case Emacs is idle for a longer time, no state is
+;; saved.
+
+;; See README.org for more details.
 
 ;;; Code:
 
