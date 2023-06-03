@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2023 Bram Schoenmakers
 
-;; Author: Bram Schoenmakers <me@bramschoenmokers.nl>
-;; Maintainer: Bram Schoenmakers <me@bramschoenmokers.nl>
+;; Author: Bram Schoenmakers <me@bramschoenmakers.nl>
+;; Maintainer: Bram Schoenmakers <me@bramschoenmakers.nl>
 ;; Created: 05 May 2023
 ;; Package-Version: 0.1
 ;; Keywords: convenience
@@ -105,7 +105,7 @@ Each package is a cons cell with the package name and a plist with:
 (defun persist-state--enable-packages ()
   "Enables all supported packages.
 
-If a package has no argumunts (no `:args' attribute, the function
+If a package has no arguments (no `:args' attribute, the function
 is added as-is, otherwise it's wrapped in a lambda performing an
 `apply' call.)"
   (mapc (lambda (package)
