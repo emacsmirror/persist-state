@@ -7,7 +7,7 @@ I don't leave Emacs often, but sometimes Emacs leaves me.
 
 At moments like these it's convenient to start Emacs again with a reasonably up to date state from the previous session: history variables, bookmarks, open buffers, etc. Usually these items are saved at Emacs exit (as part of =kill-emacs-hook=), but when Emacs exits unexpectedly due to a crash, these functions are not executed and you're left with an outdated state (if any).
 
-This package saves your Emacs state regularly when idle for a brief moment, to minimize disturbance of executing all save functions in sequence. In case Emacs is idle for a longer time, no state is saved.
+This package saves your Emacs state regularly when idle for a brief moment, to minimize the disturbance of executing all save functions in sequence (as Emacs blocks for a brief moment). In case Emacs is idle for a longer time, no state is saved.
 
 * Supported packages
 
@@ -86,6 +86,11 @@ To add custom functions that should be executed, add functions to =persist-state
 ** COMMENT Attribution :noexport:
 
 The code to generate the table of configuration items was inspired by an idea of [[https://xenodium.com/generating-elisp-org-docs/][Álvaro Ramírez]] (a.k.a. xenodium).
+
+* Related packages
+
+- [[https://elpa.gnu.org/packages/persist.html][persist]] :: This package targets package developers to declare variables to be persisted across Emacs sessions.
+- savehist :: This built-in package saves history variables. Actually, this package is called by /persist-state/ to save the history variables at regular intervals.
 
 * Contact
 
