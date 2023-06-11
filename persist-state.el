@@ -123,7 +123,6 @@ is added as-is, otherwise it's wrapped in a lambda performing an
 
 (defun persist-state--enable ()
   "Start saving the Emacs state at the configured interval."
-  (interactive)
   (persist-state--enable-packages)
 
   ;; only start the timer once
@@ -135,7 +134,6 @@ is added as-is, otherwise it's wrapped in a lambda performing an
 
 (defun persist-state--disable ()
   "Stop saving the Emacs state."
-  (interactive)
   (when (timerp persist-state--save-state-timer)
     (cancel-timer persist-state--save-state-timer)))
 
