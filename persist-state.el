@@ -95,11 +95,12 @@ Each package is a cons cell with the package name and a plist with:
 - :label (optional): a readable package name (for the README);
 - :url (optional): URL to the package.")
 
-(defun persist-state--regularly-run-on-idle (interval idle-seconds f &rest args)
-  "Run function F with ARGS every INTERVAL seconds, plus IDLE-SECONDS."
-  (run-with-timer interval interval
+(defun persist-state--regularly-run-on-idle (f &rest args)
+  "Run function F with ARGS at the configured interval (plus some idle time)."
+  (run-with-timer persist-state-save-interval
+                  persist-state-save-interval
                   (lambda ()
-                    (run-with-idle-timer idle-seconds nil
+                    (run-with-idle-timer persist-state-wait-idle nil
                                          (lambda ()
                                            (apply f args))))))
 
@@ -128,9 +129,7 @@ is added as-is, otherwise it's wrapped in a lambda performing an
   ;; only start the timer once
   (when (null (timerp persist-state--save-state-timer))
     (setq persist-state--save-state-timer
-          (persist-state--regularly-run-on-idle persist-state-save-interval
-                                                persist-state-wait-idle
-                                                #'persist-state--save-state))))
+          (persist-state--regularly-run-on-idle #'persist-state--save-state))))
 
 (defun persist-state--disable ()
   "Stop saving the Emacs state."
