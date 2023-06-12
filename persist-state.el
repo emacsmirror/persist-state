@@ -1,11 +1,10 @@
-;;; persist-state.el --- Persist state regularly  -*- lexical-binding: t; -*-
+;;; persist-state.el --- Regularly persist bookmarks, history, recent files and more -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023 Bram Schoenmakers
 
 ;; Author: Bram Schoenmakers <me@bramschoenmakers.nl>
 ;; Maintainer: Bram Schoenmakers <me@bramschoenmakers.nl>
 ;; Created: 05 May 2023
-;; Version: 0.1
 ;; Package-Requires: ((emacs "28.2"))
 ;; Keywords: convenience
 ;; URL: https://codeberg.org/bram85/emacs-persist-state.git
