@@ -47,11 +47,6 @@
   "Persist the Emacs state at regular intervals."
   :group 'convenience)
 
-(defcustom persist-state-saving-functions nil
-  "A list of functions that should be executed as part of saving state."
-  :type '(repeat function)
-  :group 'persist-state)
-
 (defvar persist-state--save-state-timer nil
   "This variable holds the timer object to trigger regular saves.")
 
@@ -67,31 +62,59 @@
   :type '(integer)
   :group 'persist-state)
 
+(defun persist-state--save-bookmarks ()
+  "Save bookmarks if the built-in bookmark package is active."
+  (when (bound-and-true-p bookmark-save-flag)
+    (bookmark-save)))
+
+(defun persist-state--save-desktop ()
+  "Save the desktop if the built-in desktop.el package is active."
+  (when (bound-and-true-p desktop-save-mode)
+    (desktop-save (car desktop-path) nil t)))
+
+(defun persist-state--save-eshell ()
+  "Save the Eshell history if active."
+  (when (bound-and-true-p eshell-hist-mode)
+    (eshell-save-some-history)))
+
+(defun persist-state--save-prescient ()
+  "Save the prescient data if the package is active."
+  (when (bound-and-true-p prescient-persist-mode)
+    (prescient--save)))
+
+(defun persist-state--save-recentf ()
+  "Save the list of recent files if the built-in recentf package is active."
+  (when (bound-and-true-p recentf-mode)
+    (recentf-save-list)))
+
+(defun persist-state--save-savehist ()
+  "Save the history variables if the built-in savehist package is active."
+  (when (bound-and-true-p savehist-mode)
+    (savehist-autosave)))
+
 (defvar persist-state-supported-packages-alist
-  `((bookmark . (:function (lambda () (when bookmark-save-flag
-                                   (bookmark-save)))))
-
-    (desktop . (:function (lambda () (when desktop-save-mode
-                                  (desktop-save (car desktop-path) nil t)))))
-
-    (em-hist . (:function eshell-save-some-history
+  `((bookmark . (:function persist-state--save-bookmarks))
+    (desktop . (:function persist-state--save-desktop))
+    (em-hist . (:function persist-state--save-eshell
                           :label "Eshell history"))
-
-    (prescient . (:function (lambda () (when prescient-persist-mode
-                                    (prescient--save)))
+    (prescient . (:function persist-state--save-prescient
                             :label "Prescient.el"
                             :url "https://github.com/radian-software/prescient.el"))
-
-    (recentf . (:function recentf-save-list))
-
-    (savehist . (:function (lambda () (when savehist-mode
-                                   (savehist-autosave))))))
+    (recentf . (:function persist-state--save-recentf))
+    (savehist . (:function persist-state--save-savehist)))
   "A list of packages supported by persist-state.
 
 Each package is a cons cell with the package name and a plist with:
 - :function (mandatory): function to call to save state;
 - :label (optional): a readable package name (for the README);
 - :url (optional): URL to the package.")
+
+(defcustom persist-state-saving-functions
+  (mapcar (lambda (pkg) (plist-get pkg :function))
+          (map-values persist-state-supported-packages-alist))
+  "A list of functions that should be executed as part of saving state."
+  :type '(repeat function)
+  :group 'persist-state)
 
 (defun persist-state--regularly-run-on-idle (f &rest args)
   "Run function F with ARGS at the configured interval (plus some idle time)."
@@ -107,22 +130,8 @@ Each package is a cons cell with the package name and a plist with:
   (when (< (float-time (current-idle-time)) persist-state-save-interval)
     (mapc #'funcall persist-state-saving-functions)))
 
-(defun persist-state--enable-packages ()
-  "Enables all supported packages.
-
-If a package has no arguments (no `:args' attribute, the function
-is added as-is, otherwise it's wrapped in a lambda performing an
-`apply' call.)"
-  (mapc (lambda (package)
-          (with-eval-after-load (car package)
-            (let ((attrs (cdr package)))
-              (add-to-list 'persist-state-saving-functions
-                           (plist-get attrs :function)))))
-        persist-state-supported-packages-alist))
-
 (defun persist-state--enable ()
   "Start saving the Emacs state at the configured interval."
-  (persist-state--enable-packages)
 
   ;; only start the timer once
   (when (null (timerp persist-state--save-state-timer))
