@@ -62,31 +62,38 @@
   :type '(integer)
   :group 'persist-state)
 
+(declare-function bookmark-save "ext:bookmark")
 (defun persist-state--save-bookmarks ()
   "Save bookmarks if the built-in bookmark package is active."
   (when (bound-and-true-p bookmark-save-flag)
     (bookmark-save)))
 
+(declare-function desktop-save "desktop")
+(defvar desktop-path)
 (defun persist-state--save-desktop ()
   "Save the desktop if the built-in desktop.el package is active."
   (when (bound-and-true-p desktop-save-mode)
     (desktop-save (car desktop-path) nil t)))
 
+(declare-function eshell-save-some-history "ext:em-hist")
 (defun persist-state--save-eshell ()
   "Save the Eshell history if active."
   (when (bound-and-true-p eshell-hist-mode)
     (eshell-save-some-history)))
 
+(declare-function prescient--save "ext:prescient")
 (defun persist-state--save-prescient ()
   "Save the prescient data if the package is active."
   (when (bound-and-true-p prescient-persist-mode)
     (prescient--save)))
 
+(declare-function recentf-save-list "ext:recentf")
 (defun persist-state--save-recentf ()
   "Save the list of recent files if the built-in recentf package is active."
   (when (bound-and-true-p recentf-mode)
     (recentf-save-list)))
 
+(declare-function savehist-autosave "ext:savehist")
 (defun persist-state--save-savehist ()
   "Save the history variables if the built-in savehist package is active."
   (when (bound-and-true-p savehist-mode)
