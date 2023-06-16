@@ -73,14 +73,16 @@ This table shows which variables can be customized.
 #+RESULTS:
 | Custom variable                | Description                                                             |
 |--------------------------------+-------------------------------------------------------------------------|
+| persist-state-mode             | Non-nil if Persist-State mode is enabled.                               |
+| persist-state-mode-hook        | Hook run after entering or leaving `persist-state-mode'.                |
 | persist-state-save-interval    | Interval (in seconds) to persist state.                                 |
 | persist-state-saving-functions | A list of functions that should be executed as part of saving state.    |
 | persist-state-wait-idle        | When it's time to save, wait for this amount of idle time (in seconds). |
 
-To add custom functions that should be executed, add functions to =persist-state-functions=. E.g. to save bookmarks at regular intervals:
+To add your own save functions, simply add those to the =persist-state-functions= variable. For example, if you use the [[https://github.com/nullman/emacs-org-visibility][org-visibility]] package, you could save the heading visibility data on a regular basis as well:
 
 #+begin_src elisp
-  (add-to-list 'persist-state-functions #'bookmark-save)
+  (add-to-list 'persist-state-functions #'org-visibility-save-all-buffers)
 #+end_src
 
 ** COMMENT Attribution :noexport:
