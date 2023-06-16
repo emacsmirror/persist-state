@@ -63,52 +63,52 @@
   :group 'persist-state)
 
 (declare-function bookmark-save "ext:bookmark")
-(defun persist-state--save-bookmarks ()
+(defun persist-state--maybe-save-bookmarks ()
   "Save bookmarks if the built-in bookmark package is active."
   (when (bound-and-true-p bookmark-save-flag)
     (bookmark-save)))
 
 (declare-function desktop-save "desktop")
 (defvar desktop-path)
-(defun persist-state--save-desktop ()
+(defun persist-state--maybe-save-desktop ()
   "Save the desktop if the built-in desktop.el package is active."
   (when (bound-and-true-p desktop-save-mode)
     (desktop-save (car desktop-path) nil t)))
 
 (declare-function eshell-save-some-history "ext:em-hist")
-(defun persist-state--save-eshell ()
+(defun persist-state--maybe-save-eshell ()
   "Save the Eshell history if active."
   (when (bound-and-true-p eshell-hist-mode)
     (eshell-save-some-history)))
 
 (declare-function prescient--save "ext:prescient")
-(defun persist-state--save-prescient ()
+(defun persist-state--maybe-save-prescient ()
   "Save the prescient data if the package is active."
   (when (bound-and-true-p prescient-persist-mode)
     (prescient--save)))
 
 (declare-function recentf-save-list "ext:recentf")
-(defun persist-state--save-recentf ()
+(defun persist-state--maybe-save-recentf ()
   "Save the list of recent files if the built-in recentf package is active."
   (when (bound-and-true-p recentf-mode)
     (recentf-save-list)))
 
 (declare-function savehist-autosave "ext:savehist")
-(defun persist-state--save-savehist ()
+(defun persist-state--maybe-save-savehist ()
   "Save the history variables if the built-in savehist package is active."
   (when (bound-and-true-p savehist-mode)
     (savehist-autosave)))
 
 (defvar persist-state-supported-packages-alist
-  `((bookmark . (:function persist-state--save-bookmarks))
-    (desktop . (:function persist-state--save-desktop))
-    (em-hist . (:function persist-state--save-eshell
+  `((bookmark . (:function persist-state--maybe-save-bookmarks))
+    (desktop . (:function persist-state--maybe-save-desktop))
+    (em-hist . (:function persist-state--maybe-save-eshell
                           :label "Eshell history"))
-    (prescient . (:function persist-state--save-prescient
+    (prescient . (:function persist-state--maybe-save-prescient
                             :label "Prescient.el"
                             :url "https://github.com/radian-software/prescient.el"))
-    (recentf . (:function persist-state--save-recentf))
-    (savehist . (:function persist-state--save-savehist)))
+    (recentf . (:function persist-state--maybe-save-recentf))
+    (savehist . (:function persist-state--maybe-save-savehist)))
   "A list of packages supported by persist-state.
 
 Each package is a cons cell with the package name and a plist with:
