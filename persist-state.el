@@ -5,6 +5,7 @@
 ;; Author: Bram Schoenmakers <me@bramschoenmakers.nl>
 ;; Maintainer: Bram Schoenmakers <me@bramschoenmakers.nl>
 ;; Created: 05 May 2023
+;; Package-Version: 0.2
 ;; Package-Requires: ((emacs "28.2"))
 ;; Keywords: convenience
 ;; URL: https://codeberg.org/bram85/emacs-persist-state.git
