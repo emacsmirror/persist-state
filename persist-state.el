@@ -44,6 +44,8 @@
 
 ;;; Code:
 
+(require 'map)
+
 (defgroup persist-state nil
   "Persist the Emacs state at regular intervals."
   :group 'convenience)
