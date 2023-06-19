@@ -60,8 +60,10 @@ This table shows which variables can be customized.
   (let ((rows))
     (mapatoms
      (lambda (symbol)
-       (when (and (string-match "^persist-state"
+       (when (and (string-match "\\_<persist-state"
                                 (symbol-name symbol))
+                  (not (string-match "\\_<persist-state-mode"
+                                     (symbol-name symbol)))
                   (custom-variable-p symbol))
          (push `(,symbol
                  ,(car
@@ -79,8 +81,6 @@ This table shows which variables can be customized.
 #+RESULTS:
 | Custom variable                | Description                                                             |
 |--------------------------------+-------------------------------------------------------------------------|
-| persist-state-mode             | Non-nil if Persist-State mode is enabled.                               |
-| persist-state-mode-hook        | Hook run after entering or leaving `persist-state-mode'.                |
 | persist-state-save-interval    | Interval (in seconds) to persist state.                                 |
 | persist-state-saving-functions | A list of functions that should be executed as part of saving state.    |
 | persist-state-wait-idle        | When it's time to save, wait for this amount of idle time (in seconds). |
