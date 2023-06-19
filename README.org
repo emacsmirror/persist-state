@@ -1,6 +1,8 @@
 #+title: Emacs Persist State
 #+author: Bram Schoenmakers
 
+[[https://melpa.org/#/persist-state][file:https://melpa.org/packages/persist-state-badge.svg]]
+
 * Introduction
 
 I don't leave Emacs often, but sometimes Emacs leaves me.
@@ -34,7 +36,9 @@ persist-state supports a number of packages out of the box. For some packages th
 
 * Installation and usage
 
-At this moment, there is no MELPA package. Therefore, clone the repository and put the package in your =load-path=, for example with =use-package=:
+The easiest method is to install via [[https://melpa.org/#/persist-state][MELPA]].
+
+Alternatively, clone the repository and put the package in your =load-path=, for example with =use-package=:
 
 : git clone https://codeberg.org/bram85/emacs-persist-state.git
 
