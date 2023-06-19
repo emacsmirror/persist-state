@@ -1,7 +1,9 @@
 #+title: Emacs Persist State
 #+author: Bram Schoenmakers
 
-[[https://melpa.org/#/persist-state][file:https://melpa.org/packages/persist-state-badge.svg]]
+#+begin_export html
+<a href="https://melpa.org/#/persist-state"><img alt="MELPA" src="https://melpa.org/packages/persist-state-badge.svg"/></a>
+#+end_export
 
 * Introduction
 
