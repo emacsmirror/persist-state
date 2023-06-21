@@ -35,6 +35,7 @@ persist-state supports a number of packages out of the box. For some packages th
 - [[https://github.com/radian-software/prescient.el][Prescient.el]]
 - recentf
 - savehist
+- saveplace
 
 * Installation and usage
 

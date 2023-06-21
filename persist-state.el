@@ -102,6 +102,11 @@
   (when (bound-and-true-p savehist-mode)
     (savehist-autosave)))
 
+(defun persist-state--maybe-save-places ()
+  "Save places (positions in buffers) if the built-in saveplace package is active."
+  (when (bound-and-true-p save-place-mode)
+    (save-place-alist-to-file)))
+
 (defvar persist-state-supported-packages-alist
   `((bookmark . (:function persist-state--maybe-save-bookmarks))
     (desktop . (:function persist-state--maybe-save-desktop))
@@ -111,7 +116,8 @@
                             :label "Prescient.el"
                             :url "https://github.com/radian-software/prescient.el"))
     (recentf . (:function persist-state--maybe-save-recentf))
-    (savehist . (:function persist-state--maybe-save-savehist)))
+    (savehist . (:function persist-state--maybe-save-savehist))
+    (saveplace . (:function persist-state--maybe-save-places)))
   "A list of packages supported by persist-state.
 
 Each package is a cons cell with the package name and a plist with:
