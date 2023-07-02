@@ -3,6 +3,7 @@
 
 #+begin_export html
 <a href="https://melpa.org/#/persist-state"><img alt="MELPA" src="https://melpa.org/packages/persist-state-badge.svg"/></a>
+<a href="https://stable.melpa.org/#/persist-state"><img alt="MELPA Stable" src="https://stable.melpa.org/packages/persist-state-badge.svg"/></a>
 #+end_export
 
 * Introduction
