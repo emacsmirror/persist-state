@@ -97,6 +97,22 @@ To add your own save functions, simply add those to the =persist-state-functions
 
 The code to generate the table of configuration items was inspired by an idea of [[https://xenodium.com/generating-elisp-org-docs/][Álvaro Ramírez]] (a.k.a. xenodium).
 
+* Multiple Emacs instances
+
+persist-state doesn't do anything special regarding multiple Emacs instances, it relies on the persistence capabilities of other packages. So persist-state only supports multiple instances if other packages do. However, most of them don't, so whoever writes last 'wins'.
+
+Actually, this is not any different than saving with the =emacs-kill-hook=, as most supported packages do. The state of the last Emacs instance will be persisted. The difference with persist-state is that state is persisted while running Emacs instances, not only at the exit.
+
+For the use-case where you have one main instance, you could detect whether the server is running. Other instances wouldn't spawn a new server, so the main instance is detectable through a non-nil =server-process= variable. For example, you could use the following configuration to trigger persist-state for the main instance only:
+
+#+begin_src elisp
+  (use-package persist-state
+    :after server
+    :if server-process
+    :config
+    (persist-state-mode))
+#+end_src
+
 * Related packages
 
 - [[https://elpa.gnu.org/packages/persist.html][persist]] :: This package targets package developers to declare variables to be persisted across Emacs sessions.
