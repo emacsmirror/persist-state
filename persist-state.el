@@ -76,7 +76,7 @@
 (defun persist-state--maybe-save-desktop ()
   "Save the desktop if the built-in desktop.el package is active."
   (when (bound-and-true-p desktop-save-mode)
-    (desktop-save (car desktop-path) nil t)))
+    (desktop-auto-save)))
 
 (declare-function eshell-save-some-history "ext:em-hist")
 (defun persist-state--maybe-save-eshell ()
