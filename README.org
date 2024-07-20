@@ -118,6 +118,12 @@ For the use-case where you have one main instance, you could detect whether the 
 - [[https://elpa.gnu.org/packages/persist.html][persist]] :: This package targets package developers to declare variables to be persisted across Emacs sessions.
 - savehist :: This built-in package saves history variables. Actually, this package is called by /persist-state/ to save the history variables at regular intervals.
 
+* Changelog
+** 0.4
+
+- Execute each save function with a timeout, for those functions that may ask for user input (e.g. the case with desktop.el).
+- desktop.el: use =desktop-auto-save= to save desktop data.
+
 * Contact
 
 - Issue reports: [[https://codeberg.org/bram85/emacs-persist-state/issues][Codeberg]]
