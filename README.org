@@ -119,6 +119,10 @@ For the use-case where you have one main instance, you could detect whether the 
 - savehist :: This built-in package saves history variables. Actually, this package is called by /persist-state/ to save the history variables at regular intervals.
 
 * Changelog
+** 0.5pre
+
+- Fix toggling the minor mode: persist-state-mode couldn't be re-enabled ([[https://codeberg.org/bram85/emacs-persist-state/issues/2][issue #2]]).
+
 ** 0.4
 
 - Execute each save function with a timeout, for those functions that may ask for user input (e.g. the case with desktop.el).

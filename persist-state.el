@@ -163,7 +163,8 @@ Each package is a cons cell with the package name and a plist with:
 (defun persist-state--disable ()
   "Stop saving the Emacs state."
   (when (timerp persist-state--save-state-timer)
-    (cancel-timer persist-state--save-state-timer)))
+    (cancel-timer persist-state--save-state-timer)
+    (setq persist-state--save-state-timer nil)))
 
 ;;;###autoload
 (define-minor-mode persist-state-mode
