@@ -143,13 +143,14 @@ Each package is a cons cell with the package name and a plist with:
 
 (defun persist-state--save-state ()
   "Save state but only when the user was active recently."
-  (when (< (float-time (current-idle-time)) persist-state-save-interval)
-    (mapc (lambda (f)
-            (with-timeout (5 ; seconds
-                           (message "persist-state: %s timed out"
-                                    (symbol-name f)))
-              (funcall f)))
-          persist-state-saving-functions)))
+  (let ((idle-time (float-time (or (current-idle-time) 0))))
+    (when (< idle-time persist-state-save-interval)
+      (mapc (lambda (f)
+              (with-timeout (5 ; seconds
+                             (message "persist-state: %s timed out"
+                                      (symbol-name f)))
+                (funcall f)))
+            persist-state-saving-functions))))
 
 (defun persist-state--enable ()
   "Start saving the Emacs state at the configured interval."
