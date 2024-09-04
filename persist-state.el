@@ -148,7 +148,7 @@ Each package is a cons cell with the package name and a plist with:
       (mapc (lambda (f)
               (with-timeout (5 ; seconds
                              (message "persist-state: %s timed out"
-                                      (symbol-name f)))
+                                      f))
                 (funcall f)))
             persist-state-saving-functions))))
 
