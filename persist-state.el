@@ -81,7 +81,7 @@
 (declare-function eshell-save-some-history "ext:em-hist")
 (defun persist-state--maybe-save-eshell ()
   "Save the Eshell history if active."
-  (when (bound-and-true-p eshell-hist-mode)
+  (when (find-buffer 'eshell-hist-mode t)
     (eshell-save-some-history)))
 
 (declare-function prescient--save "ext:prescient")
