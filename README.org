@@ -115,7 +115,7 @@ For the use-case where you have one main instance, you could detect whether the 
 
 - [[https://elpa.gnu.org/packages/persist.html][persist]] :: This package targets package developers to declare variables to be persisted across Emacs sessions.
 - savehist :: This built-in package saves history variables. Actually, this package is called by /persist-state/ to save the history variables at regular intervals.
-- [[github.com/meedstrom/eager-state][eager-state]] :: Most similar to persist-state itself, but the implementation differs.  It has no default set of persistence functions, aiming instead to make it easy to add them.
+- [[https://github.com/meedstrom/eager-state][eager-state]] :: Most similar to persist-state itself, but the implementation differs.  It has no default set of persistence functions, aiming instead to make it easy to add them.
 
 * Changelog
 ** 0.5.0
