@@ -1,5 +1,4 @@
 #+title: Emacs Persist State
-#+author: Bram Schoenmakers
 
 #+begin_export html
 <a href="https://melpa.org/#/persist-state"><img alt="MELPA" src="https://melpa.org/packages/persist-state-badge.svg"/></a>
@@ -130,6 +129,6 @@ For the use-case where you have one main instance, you could detect whether the 
 
 * Contact
 
-- Issue reports: [[https://codeberg.org/bram85/emacs-persist-state/issues][Codeberg]]
-- Mastodon: [[https://emacs.ch/@bram85][@bram85@emacs.ch]]
+- Issue reports: [[https://codeberg.org/meedstrom/emacs-persist-state/issues][Codeberg]]
+- Mastodon: [[https://hachyderm.io/@meedstrom][@meedstrom@hachyderm.io]]
 - Mail: see =git log=.

@@ -1,20 +1,17 @@
 ;;; persist-state.el --- Regularly persist bookmarks, history, recent files and more -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023 - 2024 Bram Schoenmakers
-
 ;; Author: Bram Schoenmakers <me@bramschoenmakers.nl>
-;; Maintainer: Bram Schoenmakers <me@bramschoenmakers.nl>
+;; Maintainer: Martin Edström <meedstrom91@gmail.com>
 ;; Created: 05 May 2023
 ;; Package-Version: 0.4
 ;; Package-Requires: ((emacs "28.2"))
 ;; Keywords: convenience
-;; URL: https://codeberg.org/bram85/emacs-persist-state.git
+;; URL: https://codeberg.org/meedstrom/emacs-persist-state
 
-;; This file is not part of GNU Emacs.
+;; Copyright (C) 2023 - 2024 Bram Schoenmakers
+;; Copyright (C) 2026 Martin Edström
 
 ;; MIT License
-
-;; Copyright (c) 2023 - 2024 Bram Schoenmakers
 
 ;; Permission is hereby granted, free of charge, to any person obtaining a copy
 ;; of this software and associated documentation files (the "Software"), to deal
